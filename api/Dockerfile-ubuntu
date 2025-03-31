@@ -1,0 +1,13 @@
+FROM ubuntu:latest
+
+WORKDIR /api 
+
+COPY . .
+RUN apt-get update -y && apt-get upgrade -y
+RUN apt-get install python3 -y
+RUN apt install python3.10-venv -y
+RUN apt install python3-pip -y
+RUN python3 -m venv venv
+RUN pip install -r requirments.txt
+
+CMD [ "unvicorn","main:app","--reload" ]
